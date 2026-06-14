@@ -12,32 +12,25 @@ It provides:
 - A Codex Desktop marketplace plugin package.
 - A Claude-compatible skill package.
 
-## Install
+## Which Install Method Should I Use?
 
-First-time install:
+| Environment | Install method | Notes |
+|---|---|---|
+| Claude Code | `/plugin marketplace add` then `/plugin install` | Uses `.claude-plugin/marketplace.json`. |
+| Codex CLI | `/plugin marketplace add` then `/plugin install` | Uses the Codex marketplace entry in `.agents/plugins/marketplace.json`. |
+| Codex Desktop | Add a custom marketplace from the Plugins UI | Use the GitHub URL and choose plugin `overleaf-paper`. |
+
+The plugin name is always:
 
 ```text
-/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
-/plugin install overleaf-paper
+overleaf-paper
 ```
 
-Claude reads the marketplace entry from:
-
-```text
-.claude-plugin/marketplace.json
-```
-
-The GitHub repository is:
+The repository is:
 
 ```text
 https://github.com/hhhwwwuuu/overleaf-paper-skill
 ```
-
-After installation, start a new Codex or Claude chat so the skill instructions are loaded.
-
-## Update An Existing Installation
-
-Install and update use similar commands, but update also depends on the plugin version. This project bumps the plugin version for every published update so Claude/Codex do not keep using an old cached package.
 
 Current plugin version:
 
@@ -45,18 +38,33 @@ Current plugin version:
 0.2.0
 ```
 
-### Claude
+## Install In Claude Code
 
-Recommended update flow:
+Run these commands inside Claude Code:
 
 ```text
 /plugin marketplace add hhhwwwuuu/overleaf-paper-skill
 /plugin install overleaf-paper
 ```
 
-Then start a new Claude chat.
+Then open a new Claude chat.
 
-If Claude still shows old behavior:
+Claude reads the marketplace entry from:
+
+```text
+.claude-plugin/marketplace.json
+```
+
+## Update In Claude Code
+
+Run the install commands again:
+
+```text
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
+```
+
+If Claude still uses an older cached version:
 
 ```text
 /plugin uninstall overleaf-paper
@@ -66,27 +74,51 @@ If Claude still shows old behavior:
 
 Then restart Claude Code and open a new chat.
 
-### Codex Desktop
+## Install In Codex CLI
 
-Recommended update flow:
-
-1. Open Codex Desktop Plugins.
-2. Refresh or re-add the custom marketplace:
+Run these commands inside Codex CLI:
 
 ```text
-Marketplace source: https://github.com/hhhwwwuuu/overleaf-paper-skill.git
-Branch/ref: main
-Plugin: overleaf-paper
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
 ```
 
-3. Reinstall or update `overleaf-paper` from the Plugins page.
-4. Open a new Codex chat and confirm that `overleaf-paper` appears in the available skills/plugins.
+Then start a new Codex CLI session.
 
-If the old behavior is still present, remove the old plugin installation, add the marketplace again, and reinstall `overleaf-paper`.
+Codex CLI reads the marketplace entry from:
+
+```text
+.agents/plugins/marketplace.json
+```
+
+The installable Codex plugin package lives at:
+
+```text
+plugins/overleaf-paper
+```
+
+## Update In Codex CLI
+
+Run the install commands again:
+
+```text
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
+```
+
+If Codex CLI still uses an older cached version, uninstall and reinstall:
+
+```text
+/plugin uninstall overleaf-paper
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
+```
+
+Then start a new Codex CLI session.
 
 ## Install In Codex Desktop
 
-In Codex Desktop, install this repository as a custom plugin marketplace:
+In Codex Desktop, install this repository from the Plugins UI as a custom marketplace:
 
 ```text
 Marketplace source: https://github.com/hhhwwwuuu/overleaf-paper-skill.git
@@ -108,6 +140,22 @@ plugins/overleaf-paper/.codex-plugin/plugin.json
 
 After installation, open a new Codex chat and check that `overleaf-paper` appears in the available skills/plugins.
 
+## Update In Codex Desktop
+
+1. Open Codex Desktop Plugins.
+2. Refresh or re-add the custom marketplace:
+
+```text
+Marketplace source: https://github.com/hhhwwwuuu/overleaf-paper-skill.git
+Branch/ref: main
+Plugin: overleaf-paper
+```
+
+3. Reinstall or update `overleaf-paper` from the Plugins page.
+4. Open a new Codex chat.
+
+If the old behavior is still present, remove the old plugin installation, add the marketplace again, and reinstall `overleaf-paper`.
+
 ## Install Locally During Development
 
 Local repository root:
@@ -127,7 +175,6 @@ Claude skill package root:
 ```text
 <path-to-this-repository>\claude\overleaf-paper
 ```
-
 ## Overleaf Token
 
 A token is not required for writing guidance or JSS checks.
