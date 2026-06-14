@@ -56,19 +56,19 @@ After installation, open a new Codex chat and check that `overleaf-paper` appear
 Local repository root:
 
 ```text
-E:\Projects\overleaf_skill\overleaf-paper
+<path-to-this-repository>
 ```
 
 Codex plugin package root:
 
 ```text
-E:\Projects\overleaf_skill\overleaf-paper\plugins\overleaf-paper
+<path-to-this-repository>\plugins\overleaf-paper
 ```
 
 Claude skill package root:
 
 ```text
-E:\Projects\overleaf_skill\overleaf-paper\claude\overleaf-paper
+<path-to-this-repository>\claude\overleaf-paper
 ```
 
 ## Overleaf Token
@@ -104,7 +104,7 @@ Supported aliases:
 Examples:
 
 ```text
-Use $overleaf-paper: overleaf-jss-check E:\Papers\my-paper\main.tex
+Use $overleaf-paper: overleaf-jss-check path/to/my-paper/main.tex
 ```
 
 ```text
