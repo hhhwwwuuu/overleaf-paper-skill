@@ -10,9 +10,9 @@ It provides:
 - A Codex Desktop marketplace plugin package.
 - A Claude-compatible skill package.
 
-## Install Or Update
+## Install
 
-Use the same commands for first install and update:
+First-time install:
 
 ```text
 /plugin marketplace add hhhwwwuuu/overleaf-paper-skill
@@ -31,30 +31,45 @@ The GitHub repository is:
 https://github.com/hhhwwwuuu/overleaf-paper-skill
 ```
 
-After updating, start a new Codex or Claude chat so the latest skill instructions are loaded.
+After installation, start a new Codex or Claude chat so the skill instructions are loaded.
 
 ## Update An Existing Installation
 
+Install and update use similar commands, but update also depends on the plugin version. This project bumps the plugin version for every published update so Claude/Codex do not keep using an old cached package.
+
+Current plugin version:
+
+```text
+0.1.1
+```
+
 ### Claude
 
-If `overleaf-paper` is already installed in Claude, run the same two commands again:
+Recommended update flow:
 
 ```text
 /plugin marketplace add hhhwwwuuu/overleaf-paper-skill
 /plugin install overleaf-paper
 ```
 
-Then start a new Claude chat. If Claude still uses an older cached copy, restart Claude Code and run the two commands again.
+Then start a new Claude chat.
 
-Claude marketplace metadata is stored in:
+If Claude still shows old behavior or reports a cached MCP failure:
 
 ```text
-.claude-plugin/marketplace.json
+/plugin uninstall overleaf-paper
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
 ```
+
+Then restart Claude Code and open a new chat.
 
 ### Codex Desktop
 
-If `overleaf-paper` is already installed in Codex Desktop, refresh or reinstall the custom marketplace/plugin from the Plugins page:
+Recommended update flow:
+
+1. Open Codex Desktop Plugins.
+2. Refresh or re-add the custom marketplace:
 
 ```text
 Marketplace source: https://github.com/hhhwwwuuu/overleaf-paper-skill.git
@@ -62,10 +77,14 @@ Branch/ref: main
 Plugin: overleaf-paper
 ```
 
-Then open a new Codex chat and confirm that `overleaf-paper` appears in the available skills/plugins.
+3. Reinstall or update `overleaf-paper` from the Plugins page.
+4. Open a new Codex chat and confirm that `overleaf-paper` appears in the available skills/plugins.
 
-If the old behavior is still present after reinstalling, remove the old plugin installation from Codex Desktop, add the marketplace again, and reinstall `overleaf-paper`.
+If the old behavior is still present, remove the old plugin installation, add the marketplace again, and reinstall `overleaf-paper`.
 
+## MCP Server Note
+
+The MCP server is committed as a bundled `dist/index.js`, so users do not need to run `npm ci` after installing the plugin from GitHub. The npm build steps are only for maintainers who modify `mcp-server/src/index.ts`.
 ## Install In Codex Desktop
 
 In Codex Desktop, install this repository as a custom plugin marketplace:

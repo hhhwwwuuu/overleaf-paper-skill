@@ -1,6 +1,6 @@
 {
     "name":  "overleaf-paper",
-    "version":  "0.1.0",
+    "version":  "0.1.1",
     "description":  "Portable Overleaf paper-writing skill for AI coding agents: sync Overleaf projects through Git, revise LaTeX manuscripts locally, and check Journal of Systems and Software writing requirements.",
     "author":  {
                    "name":  "hhhwwwuuu"

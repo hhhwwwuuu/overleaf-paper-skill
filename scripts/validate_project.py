@@ -106,6 +106,14 @@ def check_claude_marketplace() -> None:
     if not any(plugin.get("name") == "overleaf-paper" and plugin.get("source") == "./" for plugin in plugins):
         fail(".claude-plugin/marketplace.json must expose overleaf-paper from ./")
 
+
+def check_bundled_mcp() -> None:
+    external_import = re.compile(r"^\s*import\s+.+\s+from\s+['\"]@modelcontextprotocol/", re.M)
+    for path in ["mcp-server/dist/index.js", "plugins/overleaf-paper/mcp-server/dist/index.js"]:
+        text = (ROOT / path).read_text(encoding="utf-8-sig")
+        if external_import.search(text):
+            fail(f"{path} must be bundled and must not import @modelcontextprotocol at runtime")
+
 def main() -> int:
     check_exists()
     for path in JSON_FILES:
@@ -118,6 +126,7 @@ def main() -> int:
             py_compile.compile(str(ROOT / path), cfile=str(tmpdir_path / f"check_{index}.pyc"), doraise=True)
     check_marketplace()
     check_claude_marketplace()
+    check_bundled_mcp()
     print("Project validation passed.")
     return 0
 

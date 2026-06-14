@@ -1,17 +1,17 @@
 {
-  "name": "overleaf-paper-skill",
-  "owner": {
-    "name": "hhhwwwuuu",
-    "url": "https://github.com/hhhwwwuuu"
-  },
-  "description": "Overleaf Paper provides AI-agent workflows for Overleaf Git projects, local LaTeX editing, and Journal of Systems and Software manuscript checks.",
-  "plugins": [
-    {
-      "name": "overleaf-paper",
-      "source": "./",
-      "description": "Write academic papers locally, sync Overleaf projects through Git, and check JSS writing and formatting requirements.",
-      "version": "0.1.0",
-      "license": "MIT"
-    }
-  ]
+    "name":  "overleaf-paper-skill",
+    "owner":  {
+                  "name":  "hhhwwwuuu",
+                  "url":  "https://github.com/hhhwwwuuu"
+              },
+    "description":  "Overleaf Paper provides AI-agent workflows for Overleaf Git projects, local LaTeX editing, and Journal of Systems and Software manuscript checks.",
+    "plugins":  [
+                    {
+                        "name":  "overleaf-paper",
+                        "source":  "./",
+                        "description":  "Write academic papers locally, sync Overleaf projects through Git, and check JSS writing and formatting requirements.",
+                        "version":  "0.1.1",
+                        "license":  "MIT"
+                    }
+                ]
 }

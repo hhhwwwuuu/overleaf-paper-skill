@@ -1,6 +1,6 @@
 {
     "name":  "overleaf-paper",
-    "version":  "0.1.0",
+    "version":  "0.1.1",
     "description":  "Author academic papers locally while synchronizing Overleaf projects through Git, with Journal of Systems and Software writing guidance.",
     "author":  {
                    "name":  "hhhwwwuuu"

@@ -1,6 +1,6 @@
 {
     "name":  "overleaf-paper",
-    "version":  "0.1.0",
+    "version":  "0.1.1",
     "description":  "Codex-native Overleaf paper-writing skill for syncing Overleaf projects through Git, revising LaTeX manuscripts locally, and checking Journal of Systems and Software writing requirements.",
     "author":  {
                    "name":  "hhhwwwuuu"
