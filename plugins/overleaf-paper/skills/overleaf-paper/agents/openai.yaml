@@ -1,0 +1,3 @@
+display_name: Overleaf Paper
+short_description: Write papers locally and sync Overleaf projects through Git.
+default_prompt: Pull my Overleaf manuscript, revise it for JSS requirements, validate the LaTeX, and prepare a safe push summary.
