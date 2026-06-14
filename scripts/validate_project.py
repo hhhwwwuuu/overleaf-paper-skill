@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED = [
     ".agents/plugins/marketplace.json",
+    ".claude-plugin/marketplace.json",
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
     ".mcp.json",
@@ -39,6 +40,7 @@ REQUIRED = [
 
 JSON_FILES = [
     ".agents/plugins/marketplace.json",
+    ".claude-plugin/marketplace.json",
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
     ".mcp.json",
@@ -97,6 +99,13 @@ def check_marketplace() -> None:
         fail("marketplace.json must expose ./plugins/overleaf-paper")
 
 
+
+def check_claude_marketplace() -> None:
+    data = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8-sig"))
+    plugins = data.get("plugins", [])
+    if not any(plugin.get("name") == "overleaf-paper" and plugin.get("source") == "./" for plugin in plugins):
+        fail(".claude-plugin/marketplace.json must expose overleaf-paper from ./")
+
 def main() -> int:
     check_exists()
     for path in JSON_FILES:
@@ -108,6 +117,7 @@ def main() -> int:
         for index, path in enumerate(PY_FILES):
             py_compile.compile(str(ROOT / path), cfile=str(tmpdir_path / f"check_{index}.pyc"), doraise=True)
     check_marketplace()
+    check_claude_marketplace()
     print("Project validation passed.")
     return 0
 

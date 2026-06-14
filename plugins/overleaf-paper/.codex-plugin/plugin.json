@@ -3,7 +3,7 @@
     "version":  "0.1.0",
     "description":  "Codex-native Overleaf paper-writing skill for syncing Overleaf projects through Git, revising LaTeX manuscripts locally, and checking Journal of Systems and Software writing requirements.",
     "author":  {
-                   "name":  "Local developer"
+                   "name":  "hhhwwwuuu"
                },
     "homepage":  "https://github.com/hhhwwwuuu/overleaf-paper-skill",
     "repository":  "https://github.com/hhhwwwuuu/overleaf-paper-skill",
@@ -22,7 +22,7 @@
                       "displayName":  "Overleaf Paper",
                       "shortDescription":  "Write papers locally and sync Overleaf projects through Git.",
                       "longDescription":  "Overleaf Paper for Codex supports Overleaf Git clone, pull, status, commit, push, and sync operations, plus Journal of Systems and Software manuscript writing and formatting checks.",
-                      "developerName":  "Local developer",
+                      "developerName":  "hhhwwwuuu",
                       "category":  "Research",
                       "capabilities":  [
                                            "Interactive",

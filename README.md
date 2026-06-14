@@ -19,6 +19,12 @@ Use the same commands for first install and update:
 /plugin install overleaf-paper
 ```
 
+Claude reads the marketplace entry from:
+
+```text
+.claude-plugin/marketplace.json
+```
+
 The GitHub repository is:
 
 ```text
