@@ -30,7 +30,7 @@ Recognize these aliases when they appear in a Codex or Claude prompt:
 Treat slash-prefixed aliases as plain-text intent when the client passes them through. If a client intercepts slash commands, tell the user to use the plain alias form.
 ## Resource Map
 
-Read only the reference needed for the task:
+Read only the reference needed for the task. These reference files are offline operational manuals; use their local content first and treat source links as provenance only:
 
 - `references/overleaf-git.md` for Overleaf Git URLs, token authentication, branch behavior, and sync cautions.
 - `references/jss-writing-formatting.md` for Journal of Systems and Software writing and formatting checks.
