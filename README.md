@@ -33,6 +33,39 @@ https://github.com/hhhwwwuuu/overleaf-paper-skill
 
 After updating, start a new Codex or Claude chat so the latest skill instructions are loaded.
 
+## Update An Existing Installation
+
+### Claude
+
+If `overleaf-paper` is already installed in Claude, run the same two commands again:
+
+```text
+/plugin marketplace add hhhwwwuuu/overleaf-paper-skill
+/plugin install overleaf-paper
+```
+
+Then start a new Claude chat. If Claude still uses an older cached copy, restart Claude Code and run the two commands again.
+
+Claude marketplace metadata is stored in:
+
+```text
+.claude-plugin/marketplace.json
+```
+
+### Codex Desktop
+
+If `overleaf-paper` is already installed in Codex Desktop, refresh or reinstall the custom marketplace/plugin from the Plugins page:
+
+```text
+Marketplace source: https://github.com/hhhwwwuuu/overleaf-paper-skill.git
+Branch/ref: main
+Plugin: overleaf-paper
+```
+
+Then open a new Codex chat and confirm that `overleaf-paper` appears in the available skills/plugins.
+
+If the old behavior is still present after reinstalling, remove the old plugin installation from Codex Desktop, add the marketplace again, and reinstall `overleaf-paper`.
+
 ## Install In Codex Desktop
 
 In Codex Desktop, install this repository as a custom plugin marketplace:
