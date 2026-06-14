@@ -1,6 +1,6 @@
 {
     "name":  "overleaf-paper",
-    "version":  "0.1.1",
+    "version":  "0.2.0",
     "description":  "Author academic papers locally while synchronizing Overleaf projects through Git, with Journal of Systems and Software writing guidance.",
     "author":  {
                    "name":  "hhhwwwuuu"
@@ -9,16 +9,14 @@
     "interface":  {
                       "displayName":  "Overleaf Paper",
                       "shortDescription":  "Write papers locally and sync Overleaf projects through Git.",
-                      "longDescription":  "Adds an academic paper workflow for Overleaf Git projects, including local clone, pull, status, commit, push, and sync operations, plus Journal of Systems and Software writing and formatting checks.",
+                      "longDescription":  "Adds an academic paper workflow for Overleaf Git projects, including offline Overleaf Git instructions and Journal of Systems and Software writing and formatting checks.",
                       "developerName":  "hhhwwwuuu",
                       "category":  "Productivity",
                       "capabilities":  [
-                                           "mcp",
                                            "skills"
                                        ],
                       "defaultPrompt":  "Use Overleaf Paper to pull my Overleaf manuscript, revise it for Journal of Systems and Software requirements, validate it, and prepare a safe push summary."
                   },
-    "mcpServers":  "./.mcp.json",
     "homepage":  "https://github.com/hhhwwwuuu/overleaf-paper-skill",
     "repository":  "https://github.com/hhhwwwuuu/overleaf-paper-skill",
     "license":  "MIT"

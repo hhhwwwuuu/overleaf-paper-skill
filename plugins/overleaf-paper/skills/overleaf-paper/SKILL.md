@@ -13,8 +13,8 @@ Treat Overleaf as the remote source of record and the local clone as the editabl
 
 This skill is written to be portable across Codex and Claude-style skill loaders:
 
-- In Codex, use the plugin root and its `.codex-plugin/plugin.json`, `.mcp.json`, and MCP server.
-- In Claude, package or copy the `claude/overleaf-paper` folder. Claude can use the same `SKILL.md`, references, and scripts, while Git commands may run through the user's shell or a configured MCP bridge.
+- In Codex, use the plugin root and its `.codex-plugin/plugin.json` plus the bundled `skills/overleaf-paper` package.
+- In Claude, package or copy the `claude/overleaf-paper` folder. Claude can use the same `SKILL.md`, references, and scripts; Overleaf operations use normal Git commands from the local environment.
 - In any agent, never store credentials in the repository. Use `OVERLEAF_GIT_TOKEN` or an OS credential manager.
 
 ## Prompt Aliases
@@ -39,7 +39,7 @@ Read only the reference needed for the task. These reference files are offline o
 ## Overleaf Git Workflow
 
 1. Identify either an Overleaf Git URL or an existing local clone path.
-2. If MCP tools are available, prefer the `overleaf-git` MCP tools over ad hoc shell commands.
+2. Use normal Git commands from `references/overleaf-git.md`; this skill does not require or auto-start an MCP server.
 3. For first-time setup, clone into a user-approved local directory.
 4. Before editing an existing clone, run status and pull.
 5. Make scoped manuscript changes in `.tex`, `.bib`, figure, table, or supplementary files.

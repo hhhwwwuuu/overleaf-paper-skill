@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import json
 import py_compile
-import tempfile
 import re
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,14 +14,8 @@ REQUIRED = [
     ".claude-plugin/marketplace.json",
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
-    ".mcp.json",
     "plugins/overleaf-paper/.codex-plugin/plugin.json",
-    "plugins/overleaf-paper/.mcp.json",
     "plugins/overleaf-paper/skills/overleaf-paper/SKILL.md",
-    "plugins/overleaf-paper/mcp-server/package.json",
-    "plugins/overleaf-paper/mcp-server/tsconfig.json",
-    "plugins/overleaf-paper/mcp-server/src/index.ts",
-    "plugins/overleaf-paper/mcp-server/dist/index.js",
     "skills/overleaf-paper/SKILL.md",
     "skills/overleaf-paper/references/overleaf-git.md",
     "skills/overleaf-paper/references/jss-writing-formatting.md",
@@ -30,12 +24,15 @@ REQUIRED = [
     "claude/overleaf-paper/references/overleaf-git.md",
     "claude/overleaf-paper/references/jss-writing-formatting.md",
     "claude/overleaf-paper/scripts/jss_latex_check.py",
-    "mcp-server/package.json",
-    "mcp-server/tsconfig.json",
-    "mcp-server/src/index.ts",
-    "mcp-server/dist/index.js",
     "README.md",
     "LICENSE",
+]
+
+FORBIDDEN = [
+    ".mcp.json",
+    "mcp-server",
+    "plugins/overleaf-paper/.mcp.json",
+    "plugins/overleaf-paper/mcp-server",
 ]
 
 JSON_FILES = [
@@ -43,13 +40,7 @@ JSON_FILES = [
     ".claude-plugin/marketplace.json",
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
-    ".mcp.json",
     "plugins/overleaf-paper/.codex-plugin/plugin.json",
-    "plugins/overleaf-paper/.mcp.json",
-    "mcp-server/package.json",
-    "mcp-server/tsconfig.json",
-    "plugins/overleaf-paper/mcp-server/package.json",
-    "plugins/overleaf-paper/mcp-server/tsconfig.json",
 ]
 
 SKILL_FILES = [
@@ -73,6 +64,9 @@ def check_exists() -> None:
     missing = [path for path in REQUIRED if not (ROOT / path).exists()]
     if missing:
         fail("Missing required files: " + ", ".join(missing))
+    present = [path for path in FORBIDDEN if (ROOT / path).exists()]
+    if present:
+        fail("MCP files should not be present in pure skill package: " + ", ".join(present))
 
 
 def check_json(path: str) -> None:
@@ -90,6 +84,8 @@ def check_skill(path: str, expected_name: str) -> None:
         fail(f"{path} has missing or wrong name")
     if not re.search(r"^description:\s*\S.+$", frontmatter, re.M):
         fail(f"{path} is missing description")
+    if "MCP tools are available" in text or ".mcp.json" in text:
+        fail(f"{path} still references MCP runtime setup")
 
 
 def check_marketplace() -> None:
@@ -99,7 +95,6 @@ def check_marketplace() -> None:
         fail("marketplace.json must expose ./plugins/overleaf-paper")
 
 
-
 def check_claude_marketplace() -> None:
     data = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8-sig"))
     plugins = data.get("plugins", [])
@@ -107,12 +102,17 @@ def check_claude_marketplace() -> None:
         fail(".claude-plugin/marketplace.json must expose overleaf-paper from ./")
 
 
-def check_bundled_mcp() -> None:
-    external_import = re.compile(r"^\s*import\s+.+\s+from\s+['\"]@modelcontextprotocol/", re.M)
-    for path in ["mcp-server/dist/index.js", "plugins/overleaf-paper/mcp-server/dist/index.js"]:
-        text = (ROOT / path).read_text(encoding="utf-8-sig")
-        if external_import.search(text):
-            fail(f"{path} must be bundled and must not import @modelcontextprotocol at runtime")
+def check_no_mcp_metadata() -> None:
+    for path in [".codex-plugin/plugin.json", "plugins/overleaf-paper/.codex-plugin/plugin.json", ".claude-plugin/plugin.json"]:
+        data = json.loads((ROOT / path).read_text(encoding="utf-8-sig"))
+        if "mcpServers" in data:
+            fail(f"{path} must not declare mcpServers")
+        interface = data.get("interface", {})
+        if "mcp" in interface.get("capabilities", []):
+            fail(f"{path} must not list mcp capability")
+        if "mcp" in data.get("keywords", []):
+            fail(f"{path} must not list mcp keyword")
+
 
 def main() -> int:
     check_exists()
@@ -126,7 +126,7 @@ def main() -> int:
             py_compile.compile(str(ROOT / path), cfile=str(tmpdir_path / f"check_{index}.pyc"), doraise=True)
     check_marketplace()
     check_claude_marketplace()
-    check_bundled_mcp()
+    check_no_mcp_metadata()
     print("Project validation passed.")
     return 0
 

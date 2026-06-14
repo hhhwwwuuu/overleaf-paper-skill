@@ -2,9 +2,11 @@
 
 Overleaf Paper is a portable paper-writing skill/plugin for Codex and Claude. It helps AI agents work with academic manuscripts stored in Overleaf Git projects, edit LaTeX locally, and check Journal of Systems and Software (JSS) writing and formatting requirements.
 
+This project is now a pure skill package. It does not auto-register an MCP server. Overleaf operations are performed with normal Git commands documented in the offline skill references.
+
 It provides:
 
-- Overleaf Git workflows for clone, pull, status, commit, push, and sync.
+- Offline Overleaf Git workflows for clone, remote setup, pull, push, and sync.
 - A JSS writing and formatting checklist for manuscripts.
 - A lightweight LaTeX checker for highlights, keywords, structure, figures, tables, and acknowledgements.
 - A Codex Desktop marketplace plugin package.
@@ -40,7 +42,7 @@ Install and update use similar commands, but update also depends on the plugin v
 Current plugin version:
 
 ```text
-0.1.1
+0.2.0
 ```
 
 ### Claude
@@ -54,7 +56,7 @@ Recommended update flow:
 
 Then start a new Claude chat.
 
-If Claude still shows old behavior or reports a cached MCP failure:
+If Claude still shows old behavior:
 
 ```text
 /plugin uninstall overleaf-paper
@@ -82,9 +84,6 @@ Plugin: overleaf-paper
 
 If the old behavior is still present, remove the old plugin installation, add the marketplace again, and reinstall `overleaf-paper`.
 
-## MCP Server Note
-
-The MCP server is committed as a bundled `dist/index.js`, so users do not need to run `npm ci` after installing the plugin from GitHub. The npm build steps are only for maintainers who modify `mcp-server/src/index.ts`.
 ## Install In Codex Desktop
 
 In Codex Desktop, install this repository as a custom plugin marketplace:
@@ -133,11 +132,7 @@ Claude skill package root:
 
 A token is not required for writing guidance or JSS checks.
 
-A token is required if you want the agent to pull from or push to Overleaf Git. Set it as an environment variable and restart Codex or Claude:
-
-```powershell
-setx OVERLEAF_GIT_TOKEN "<your-overleaf-git-token>"
-```
+A token is required only when the user performs real Overleaf Git network operations. The skill documents the commands and authentication flow, but it does not store or manage credentials.
 
 Overleaf Git uses username `git`; the password is your Overleaf Git authentication token. Never commit the token to this repository.
 
@@ -153,10 +148,10 @@ Supported aliases:
 
 | Alias | Purpose |
 |---|---|
-| `overleaf-pull` | Clone or pull an Overleaf Git project. |
+| `overleaf-pull` | Clone or pull an Overleaf Git project using normal Git commands. |
 | `overleaf-edit` | Edit local LaTeX manuscript files. |
 | `overleaf-jss-check` | Check JSS writing and formatting requirements. |
-| `overleaf-sync` | Inspect diff, commit, and prepare a safe push. |
+| `overleaf-sync` | Inspect diff, commit, and prepare a safe Git push. |
 | `overleaf-push` | Push to Overleaf after explicit user approval. |
 
 Examples:
@@ -181,10 +176,10 @@ Claude can use the same aliases. If slash commands are supported, use slash form
 
 | Alias | Purpose |
 |---|---|
-| `/overleaf-pull` or `overleaf-pull` | Clone or pull an Overleaf Git project. |
+| `/overleaf-pull` or `overleaf-pull` | Clone or pull an Overleaf Git project using normal Git commands. |
 | `/overleaf-edit` or `overleaf-edit` | Edit local LaTeX manuscript files. |
 | `/overleaf-jss-check` or `overleaf-jss-check` | Check JSS writing and formatting requirements. |
-| `/overleaf-sync` or `overleaf-sync` | Inspect diff, commit, and prepare a safe push. |
+| `/overleaf-sync` or `overleaf-sync` | Inspect diff, commit, and prepare a safe Git push. |
 | `/overleaf-push` or `overleaf-push` | Push to Overleaf after explicit user approval. |
 
 ## Safety Notes

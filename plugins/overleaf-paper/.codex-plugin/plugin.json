@@ -1,6 +1,6 @@
 {
     "name":  "overleaf-paper",
-    "version":  "0.1.1",
+    "version":  "0.2.0",
     "description":  "Codex-native Overleaf paper-writing skill for syncing Overleaf projects through Git, revising LaTeX manuscripts locally, and checking Journal of Systems and Software writing requirements.",
     "author":  {
                    "name":  "hhhwwwuuu"
@@ -14,21 +14,19 @@
                      "academic-writing",
                      "journal-of-systems-and-software",
                      "git",
-                     "mcp",
                      "codex"
                  ],
     "skills":  "./skills/",
     "interface":  {
                       "displayName":  "Overleaf Paper",
                       "shortDescription":  "Write papers locally and sync Overleaf projects through Git.",
-                      "longDescription":  "Overleaf Paper for Codex supports Overleaf Git clone, pull, status, commit, push, and sync operations, plus Journal of Systems and Software manuscript writing and formatting checks.",
+                      "longDescription":  "Overleaf Paper for Codex supports local Git workflows for Overleaf projects and Journal of Systems and Software manuscript writing and formatting checks.",
                       "developerName":  "hhhwwwuuu",
                       "category":  "Research",
                       "capabilities":  [
                                            "Interactive",
                                            "Read",
                                            "Write",
-                                           "mcp",
                                            "skills"
                                        ],
                       "websiteURL":  "https://github.com/hhhwwwuuu/overleaf-paper-skill",
@@ -40,6 +38,5 @@
                                             "Validate my LaTeX manuscript before pushing it back to Overleaf."
                                         ],
                       "brandColor":  "#2563EB"
-                  },
-    "mcpServers":  "./.mcp.json"
+                  }
 }

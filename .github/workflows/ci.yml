@@ -12,22 +12,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
       - name: Validate project structure
         run: python scripts/validate_project.py
       - name: Check shared JSS script entrypoint
         run: python skills/overleaf-paper/scripts/jss_latex_check.py --help
-      - name: Install shared MCP dependencies
-        working-directory: mcp-server
-        run: npm ci
-      - name: Build shared MCP server
-        working-directory: mcp-server
-        run: npm run build
-      - name: Install Codex plugin MCP dependencies
-        working-directory: plugins/overleaf-paper/mcp-server
-        run: npm ci
-      - name: Build Codex plugin MCP server
-        working-directory: plugins/overleaf-paper/mcp-server
-        run: npm run build
